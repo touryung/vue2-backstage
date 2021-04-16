@@ -1,19 +1,11 @@
-# vue_shop
+## 初始化
 
-## Project setup
-```
-yarn install
-```
+创建项目并添加配置插件和依赖，如 `elementUI`，`axios`
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## 起步
 
-### Compiles and minifies for production
-```
-yarn build
-```
+删除默认代码，更改路由文件，`<router-view>` 是路由占位符
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 编写页面代码
+
+安装 `CSS` 预处理器
