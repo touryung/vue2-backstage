@@ -7,6 +7,7 @@
 <script>
 export default {
   methods: {
+    // 登出
     logout() {
       window.sessionStorage.removeItem("token");
       this.$router.replace("/login");
