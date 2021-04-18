@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "230235",
+      "name": "dingdan",
+      "font_class": "dingdan",
+      "unicode": "ea4e",
+      "unicode_decimal": 59982
+    },
+    {
+      "icon_id": "432096",
+      "name": "users",
+      "font_class": "users",
+      "unicode": "e830",
+      "unicode_decimal": 59440
+    },
+    {
+      "icon_id": "681021",
+      "name": "立方体2",
+      "font_class": "lifangti2",
+      "unicode": "e72e",
+      "unicode_decimal": 59182
+    },
+    {
+      "icon_id": "7712648",
+      "name": "data",
+      "font_class": "data",
+      "unicode": "e729",
+      "unicode_decimal": 59177
+    },
+    {
       "icon_id": "7736477",
       "name": "user",
       "font_class": "user",
@@ -18,6 +46,13 @@
       "font_class": "password",
       "unicode": "e625",
       "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "13519538",
+      "name": "s-goods",
+      "font_class": "s-goods",
+      "unicode": "e674",
+      "unicode_decimal": 58996
     }
   ]
 }
