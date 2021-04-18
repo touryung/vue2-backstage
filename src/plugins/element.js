@@ -12,6 +12,13 @@ import {
   Menu,
   Submenu,
   MenuItem,
+  Breadcrumb,
+  BreadcrumbItem,
+  Card,
+  Row,
+  Col,
+  TableColumn,
+  Table,
 } from "element-ui";
 
 Vue.use(Button)
@@ -24,7 +31,14 @@ Vue.use(Button)
   .use(Main)
   .use(Menu)
   .use(Submenu)
-  .use(MenuItem);
+  .use(MenuItem)
+  .use(Breadcrumb)
+  .use(BreadcrumbItem)
+  .use(Card)
+  .use(Row)
+  .use(Col)
+  .use(Table)
+  .use(TableColumn);
 
 // 弹窗需要挂载
 Vue.prototype.$message = Message;

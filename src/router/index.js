@@ -23,6 +23,13 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "welcome" */ "../components/Welcome.vue"),
       },
+      {
+        path: "/users",
+        component: () =>
+          import(
+            /* webpackChunkName: "users" */ "../components/user/Users.vue"
+          ),
+      },
     ],
   },
 ];
@@ -31,6 +38,7 @@ const router = new VueRouter({
   routes,
 });
 
+// 设置路由守卫
 router.beforeEach((to, from, next) => {
   // 登录页之间放行
   if (to.path === "/login") {
@@ -43,6 +51,7 @@ router.beforeEach((to, from, next) => {
     return next("/login");
   }
 
+  window.sessionStorage.setItem("activePath", to.path);
   next();
 });
 

@@ -9,14 +9,25 @@ axios.interceptors.request.use((config) => {
   return config;
 });
 
+// export default function(url = "", method = "GET", data = {}) {
+//   if (method.toUpperCase() === "GET") {
+//     let queryStr = Object.keys(data).reduce((accumulateStr, key) => {
+//       accumulateStr += `${key}=${data[key]}&`;
+//     }, "");
+//     // 根据是否有数据请求不同接口
+//     return axios.get(`${url}${queryStr ? "?" + queryStr.slice(0, -1) : ""}`);
+//   } else if (method.toUpperCase() === "POST") {
+//     return axios.post(url, data);
+//   }
+// }
 export default function(url = "", method = "GET", data = {}) {
   if (method.toUpperCase() === "GET") {
-    let queryStr = Object.keys(data).reduce((accumulateStr, key) => {
-      accumulateStr += `${key}=${data[key]}&`;
-    }, "");
-    // 根据是否有数据请求不同接口
-    return axios.get(`${url}?${queryStr ? queryStr.slice(0, -1) : ""}`);
-  } else if (method.toUpperCase() === "POST") {
+    if (Object.keys(data).length) {
+      return axios.get(url, { params: data });
+    } else {
+      return axios.get(url);
+    }
+  } else {
     return axios.post(url, data);
   }
 }

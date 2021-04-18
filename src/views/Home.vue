@@ -21,8 +21,10 @@
           text-color="#fff"
           active-text-color="#409eff"
           unique-opened
+          router
           :collapse="isCollapsed"
           :collapse-transition="false"
+          :default-active="activePath"
         >
           <!-- 一级菜单 -->
           <el-submenu
@@ -36,7 +38,7 @@
             </template>
             <!-- 二级菜单 -->
             <el-menu-item
-              :index="String(subItem.id)"
+              :index="'/' + subItem.path"
               v-for="subItem in item.children"
               :key="subItem.id"
             >
@@ -71,16 +73,21 @@ export default {
         145: "iconfont icon-data",
       },
       isCollapsed: false,
+      // 激活的路由地址
+      activePath: "",
     };
   },
   // 生命周期函数，创建之后立即获取数据
   created() {
     this.getMenuListData();
   },
+  updated() {
+    this.activePath = window.sessionStorage.getItem("activePath");
+  },
   methods: {
     // 登出
     logout() {
-      window.sessionStorage.removeItem("token");
+      window.sessionStorage.clear();
       this.$router.replace("/login");
     },
     // 请求侧边栏数据
@@ -92,6 +99,7 @@ export default {
       }
       this.menuList = menuListData.data;
     },
+    // 切换导航栏折叠状态
     toggleCollapse() {
       this.isCollapsed = !this.isCollapsed;
     },
@@ -117,10 +125,7 @@ export default {
 
     img {
       width: 50px;
-    }
-
-    span {
-      margin-left: 15px;
+      margin-right: 15px;
     }
   }
 }
