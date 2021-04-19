@@ -92,7 +92,7 @@ export default {
     },
     // 请求侧边栏数据
     async getMenuListData() {
-      const { data: menuListData } = await this.$axios("/menus", "GET");
+      const { data: menuListData } = await this.$axios.get("/menus");
 
       if (menuListData.meta.status !== 200) {
         return this.$message.error(menuListData.meta.message);

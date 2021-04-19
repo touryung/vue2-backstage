@@ -81,9 +81,8 @@ export default {
       this.$refs.loginFormRef.validate(async (valid) => {
         // 预校验
         if (!valid) return;
-        const { data: requestResult } = await this.$axios(
+        const { data: requestResult } = await this.$axios.post(
           "/login",
-          "POST",
           this.loginFormData
         );
 

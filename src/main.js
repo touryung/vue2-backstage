@@ -7,11 +7,20 @@ import "./plugins/element.js";
 import "./assets/css/global.css";
 // 导入全局图标库
 import "./assets/fonts/iconfont.css";
+// 导入请求库
+import axios from "axios";
 
-// 导入封装的请求
-import ajax from "./api/ajax.js";
-// 将请求方法绑定在 Vue 原型
-Vue.prototype.$axios = ajax;
+// 设置 axios 的基础路径
+axios.defaults.baseURL = "http://www.ysqorz.top:8888/api/private/v1/";
+
+// 添加 axios 请求拦截器
+axios.interceptors.request.use((config) => {
+  config.headers.Authorization = window.sessionStorage.getItem("token");
+  return config;
+});
+
+// 挂载到 Vue 原型
+Vue.prototype.$axios = axios;
 
 // 关闭生产模式下给出的提示
 Vue.config.productionTip = false;

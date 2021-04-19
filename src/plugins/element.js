@@ -19,6 +19,10 @@ import {
   Col,
   TableColumn,
   Table,
+  Switch,
+  Tooltip,
+  Pagination,
+  Dialog,
 } from "element-ui";
 
 Vue.use(Button)
@@ -38,7 +42,11 @@ Vue.use(Button)
   .use(Row)
   .use(Col)
   .use(Table)
-  .use(TableColumn);
+  .use(TableColumn)
+  .use(Switch)
+  .use(Tooltip)
+  .use(Pagination)
+  .use(Dialog);
 
 // 弹窗需要挂载
 Vue.prototype.$message = Message;
