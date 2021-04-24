@@ -121,3 +121,11 @@ this.$router.replace("/login");
 1. `git checkout master` 将分支切换到 `master`
 2. `git merge login` 将 `login` 分支合并
 3. `git push` 提交 `master` 分支
+
+## 添加用户逻辑
+
+1. 点击添加按钮弹出弹窗
+2. 对弹窗表单布局
+3. 关闭弹窗清除表单
+4. 对表单添加验证，包括自定义验证
+5. 点击确定按钮进行表单预校验，发送请求
