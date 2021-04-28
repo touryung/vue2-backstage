@@ -24,6 +24,7 @@ import {
   Pagination,
   Dialog,
   MessageBox,
+  Tag,
 } from "element-ui";
 
 Vue.use(Button)
@@ -47,7 +48,8 @@ Vue.use(Button)
   .use(Switch)
   .use(Tooltip)
   .use(Pagination)
-  .use(Dialog);
+  .use(Dialog)
+  .use(Tag);
 
 // 弹窗需要挂载
 Vue.prototype.$message = Message;

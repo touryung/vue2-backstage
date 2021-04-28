@@ -8,7 +8,7 @@
     </el-breadcrumb>
 
     <!-- 卡片视图 -->
-    <el-card class="box-card">
+    <el-card>
       <!-- 搜索框和添加用户按钮 -->
       <el-row :gutter="20">
         <!-- 搜索框 -->
@@ -34,7 +34,7 @@
         </el-col>
       </el-row>
       <!-- 用户列表 -->
-      <el-table :data="userList" border style="width: 100%">
+      <el-table :data="userList" border style="width: 100%" stripe>
         <el-table-column type="index" label="#" />
         <el-table-column prop="username" label="姓名" />
         <el-table-column prop="email" label="邮箱" />
@@ -86,7 +86,6 @@
             >
               <el-button type="warning" icon="el-icon-setting" size="mini" />
             </el-tooltip>
-            {{ scope.row.mg_state }}
           </template>
         </el-table-column>
       </el-table>

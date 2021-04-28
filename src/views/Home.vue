@@ -126,6 +126,7 @@ export default {
     img {
       width: 50px;
       margin-right: 15px;
+      cursor: pointer;
     }
   }
 }
