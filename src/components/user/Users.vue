@@ -34,7 +34,7 @@
         </el-col>
       </el-row>
       <!-- 用户列表 -->
-      <el-table :data="userList" border style="width: 100%" stripe>
+      <el-table :data="userList" border stripe>
         <el-table-column type="index" label="#" />
         <el-table-column prop="username" label="姓名" />
         <el-table-column prop="email" label="邮箱" />

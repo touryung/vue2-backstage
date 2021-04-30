@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <pre>
     {{ data }}
-  </div>
+  </pre>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
   methods: {
     async fetchData() {
       let data = await this.$axios.get("menus");
-      this.data = JSON.stringify(data);
+      this.data = JSON.stringify(data, null, 2);
     },
   },
 };
