@@ -84,7 +84,12 @@
               placement="top"
               :enterable="false"
             >
-              <el-button type="warning" icon="el-icon-setting" size="mini" />
+              <el-button
+                type="warning"
+                icon="el-icon-setting"
+                size="mini"
+                @click="showSetRoleDialog(scope.row)"
+              />
             </el-tooltip>
           </template>
         </el-table-column>
@@ -169,6 +174,35 @@
         </el-button>
       </span>
     </el-dialog>
+    <!-- 分配角色对话框 -->
+    <el-dialog
+      title="分配角色"
+      :visible.sync="setRoleDialogVisible"
+      width="50%"
+      @close="setRoleDialogClosed"
+    >
+      <div>
+        <p>当前的用户：{{ setRoleUserInfo.username }}</p>
+        <p>当前的角色：{{ setRoleUserInfo.role_name }}</p>
+        <p>
+          分配新角色：<el-select v-model="selectedRoleId" placeholder="请选择">
+            <el-option
+              v-for="item in roleList"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id"
+            >
+            </el-option>
+          </el-select>
+        </p>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRoleDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="setRole">
+          确 定
+        </el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -239,8 +273,14 @@ export default {
         ],
       },
 
-      editUserDialogVisible: false,
       editUserFormData: {},
+      setRoleUserInfo: {},
+
+      editUserDialogVisible: false,
+      setRoleDialogVisible: false,
+
+      roleList: [],
+      selectedRoleId: "",
     };
   },
   // 创建之后立即请求
@@ -367,6 +407,42 @@ export default {
 
       this.getUserList();
       this.$message.success(removeResult.meta.msg);
+    },
+    // 展示用户信息
+    async showSetRoleDialog(user) {
+      this.setRoleUserInfo = user;
+      // 请求角色列表
+      const { data: roleResult } = await this.$axios.get("/roles");
+      if (roleResult.meta.status !== 200) {
+        return this.$message.error(roleResult.meta.msg);
+      }
+      this.roleList = roleResult.data;
+      this.setRoleDialogVisible = true;
+    },
+    // 发送分配角色请求
+    async setRole() {
+      if (!this.selectedRoleId) {
+        return this.$message.error("请选择要分配的角色！");
+      }
+      const { data: setRoleResult } = await this.$axios.put(
+        `users/${this.setRoleUserInfo.id}/role`,
+        {
+          rid: this.selectedRoleId,
+        }
+      );
+
+      if (setRoleResult.meta.status !== 200) {
+        return this.$message.error(setRoleResult.meta.msg);
+      }
+
+      this.getUserList();
+      this.setRoleDialogVisible = false;
+      this.$message.success(setRoleResult.meta.msg);
+    },
+    // 重置分配权限数据
+    setRoleDialogClosed() {
+      this.setRoleUserInfo = {};
+      this.selectedRoleId = "";
     },
   },
 };

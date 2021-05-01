@@ -25,6 +25,9 @@ import {
   Dialog,
   MessageBox,
   Tag,
+  Tree,
+  Select,
+  Option,
 } from "element-ui";
 
 Vue.use(Button)
@@ -49,7 +52,10 @@ Vue.use(Button)
   .use(Tooltip)
   .use(Pagination)
   .use(Dialog)
-  .use(Tag);
+  .use(Tag)
+  .use(Tree)
+  .use(Select)
+  .use(Option);
 
 // 弹窗需要挂载
 Vue.prototype.$message = Message;
