@@ -7,6 +7,9 @@ import "./plugins/element.js";
 import "./assets/css/global.css";
 // 导入全局图标库
 import "./assets/fonts/iconfont.css";
+// 导入树形表格组件
+import TreeTable from "vue-table-with-tree-grid";
+
 // 导入请求库
 import axios from "axios";
 
@@ -24,6 +27,9 @@ Vue.prototype.$axios = axios;
 
 // 关闭生产模式下给出的提示
 Vue.config.productionTip = false;
+
+// 全局注册组件
+Vue.component("tree-table", TreeTable);
 
 new Vue({
   router,

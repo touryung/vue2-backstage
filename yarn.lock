@@ -7926,6 +7926,13 @@
     "hash-sum" "^1.0.2"
     "loader-utils" "^1.0.2"
 
+"vue-table-with-tree-grid@^0.2.4":
+  "integrity" "sha1-tgsigQq4Yb22aa+z1vAHmkzuUqQ="
+  "resolved" "https://registry.npm.taobao.org/vue-table-with-tree-grid/download/vue-table-with-tree-grid-0.2.4.tgz"
+  "version" "0.2.4"
+  dependencies:
+    "vue" "^2.4.3"
+
 "vue-template-compiler@^2.6.11":
   "integrity" "sha1-lH7XGWdEyKUoXr4SM/6WBDf8xX4="
   "resolved" "https://registry.npm.taobao.org/vue-template-compiler/download/vue-template-compiler-2.6.12.tgz?cache=0&sync_timestamp=1597927453960&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvue-template-compiler%2Fdownload%2Fvue-template-compiler-2.6.12.tgz"
@@ -7939,7 +7946,7 @@
   "resolved" "https://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2.6.11":
+"vue@^2.4.3", "vue@^2.6.11":
   "integrity" "sha1-9evU+mvShpQD4pqJau1JBEVskSM="
   "resolved" "https://registry.npm.taobao.org/vue/download/vue-2.6.12.tgz"
   "version" "2.6.12"

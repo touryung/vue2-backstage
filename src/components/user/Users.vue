@@ -104,8 +104,7 @@
         layout="total, sizes, prev, pager, next, jumper"
         :total="totalUserNum"
         background
-      >
-      </el-pagination>
+      />
     </el-card>
     <!-- 添加用户对话框 -->
     <el-dialog
@@ -306,8 +305,8 @@ export default {
       this.getUserList();
     },
     // 更新页码下标
-    handleCurrentChange(newPageNum) {
-      this.queryInfo.pagenum = newPageNum;
+    handleCurrentChange(newCurrentPage) {
+      this.queryInfo.pagenum = newCurrentPage;
       this.getUserList();
     },
     // 更新用户状态并保存到服务器
