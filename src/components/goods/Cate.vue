@@ -11,8 +11,8 @@
       <!-- 添加商品按钮 -->
       <el-row>
         <el-col>
-          <el-button type="primary">
-            添加商品
+          <el-button type="primary" @click="showAddCatDialog">
+            添加分类
           </el-button>
         </el-col>
       </el-row>
@@ -25,6 +25,7 @@
         show-index
         border
         index-text="#"
+        class="tree-table"
       >
         <!-- 是否有效列 -->
         <template v-slot:isOk="scope">
@@ -50,9 +51,9 @@
           <el-button type="danger" icon="el-icon-delete" size="mini"
             >删除</el-button
           >
+          {{ scope.row.cat_level }}
         </template>
       </tree-table>
-
       <!-- 导航条 -->
       <el-pagination
         @size-change="handleSizeChange"
@@ -63,6 +64,43 @@
         layout="total, sizes, prev, pager, next, jumper"
         background
       />
+      <!-- 添加分类弹窗 -->
+      <el-dialog
+        title="添加分类"
+        :visible.sync="addCateDialogVisible"
+        width="50%"
+        @close="addCateDialogClosed"
+      >
+        <!-- 主体内容区域 -->
+        <el-form
+          ref="addCateFormRef"
+          :model="addCateFormData"
+          label-width="80px"
+          :rules="addCateFormRules"
+        >
+          <el-form-item label="分类名称" prop="cat_name">
+            <el-input v-model="addCateFormData.cat_name" />
+          </el-form-item>
+          <el-form-item label="父级分类">
+            <el-cascader
+              expand-trigger="hover"
+              :options="parentCateList"
+              :props="cascaderProps"
+              v-model="selectedKeys"
+              @change="parentCateChanged"
+              :change-on-select="true"
+              clearable
+            />
+          </el-form-item>
+        </el-form>
+        <!-- 下方按钮区域 -->
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="addCateDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="addCate">
+            确 定
+          </el-button>
+        </span>
+      </el-dialog>
     </el-card>
   </div>
 </template>
@@ -101,6 +139,24 @@ export default {
           template: "operate",
         },
       ],
+      addCateDialogVisible: false,
+      addCateFormData: {
+        cat_name: "",
+        cat_pid: 0,
+        cat_level: 0,
+      },
+      addCateFormRules: {
+        cat_name: [
+          { required: true, message: "请输入分类名称", trigger: "blur" },
+        ],
+      },
+      parentCateList: [],
+      cascaderProps: {
+        value: "cat_id",
+        label: "cat_name",
+        children: "children",
+      },
+      selectedKeys: [],
     };
   },
   created() {
@@ -119,6 +175,7 @@ export default {
       this.cateList = cateListData.data.result;
       this.totalCateNum = cateListData.data.total;
     },
+    // 分页事件监听
     handleSizeChange(newPageSize) {
       this.queryInfo.pagesize = newPageSize;
       this.getCateList();
@@ -126,6 +183,56 @@ export default {
     handleCurrentChange(newCurrentPage) {
       this.queryInfo.pagenum = newCurrentPage;
       this.getCateList();
+    },
+    // 展示添加分类弹窗并请求级联选择器数据
+    showAddCatDialog() {
+      this.getParentCateList();
+      this.addCateDialogVisible = true;
+    },
+    // 获取父级分类列表
+    async getParentCateList() {
+      const {
+        data: getParentCateListResult,
+      } = await this.$axios.get("/categories", { type: 2 });
+      if (getParentCateListResult.meta.status !== 200) {
+        return this.$message.error(getParentCateListResult.meta.msg);
+      }
+      this.parentCateList = getParentCateListResult.data;
+    },
+    // 根据级联选择器的改变更新请求数据
+    parentCateChanged() {
+      if (this.selectedKeys.length > 0) {
+        this.addCateFormData.cat_pid = this.selectedKeys[
+          this.selectedKeys.length - 1
+        ];
+        this.addCateFormData.cat_level = this.selectedKeys.length;
+      } else {
+        this.addCateFormData.cat_pid = 0;
+        this.addCateFormData.cat_level = 0;
+      }
+    },
+    // 弹窗关闭重置数据
+    addCateDialogClosed() {
+      this.$refs.addCateFormRef.resetFields();
+      this.selectedKeys = [];
+      this.addCateFormData.cat_pid = 0;
+      this.addCateFormData.cat_level = 0;
+    },
+    // 发送添加请求
+    addCate() {
+      this.$refs.addCateFormRef.validate(async (valid) => {
+        if (!valid) return;
+        const { data: addCateResult } = await this.$axios.post(
+          "/categories",
+          this.addCateFormData
+        );
+        if (addCateResult.meta.status !== 200) {
+          return this.$message.error(addCateResult.meta.msg);
+        }
+        this.getCateList();
+        this.addCateDialogVisible = false;
+        this.$message.success(addCateResult.meta.msg);
+      });
     },
   },
 };
@@ -137,5 +244,12 @@ i.el-icon-success {
 }
 i.el-icon-error {
   color: red;
+}
+.tree-table {
+  margin-top: 15px;
+}
+// 级联选择器宽度占满
+.el-cascader {
+  width: 100%;
 }
 </style>

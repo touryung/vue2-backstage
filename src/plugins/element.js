@@ -28,6 +28,7 @@ import {
   Tree,
   Select,
   Option,
+  Cascader,
 } from "element-ui";
 
 Vue.use(Button)
@@ -55,7 +56,8 @@ Vue.use(Button)
   .use(Tag)
   .use(Tree)
   .use(Select)
-  .use(Option);
+  .use(Option)
+  .use(Cascader);
 
 // 弹窗需要挂载
 Vue.prototype.$message = Message;
