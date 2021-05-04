@@ -45,13 +45,20 @@
         </template>
         <!-- 操作列 -->
         <template v-slot:operate="scope">
-          <el-button type="primary" icon="el-icon-edit" size="mini"
+          <el-button
+            type="primary"
+            icon="el-icon-edit"
+            size="mini"
+            @click="showEditCateDialog(scope.row.cat_id)"
             >编辑</el-button
           >
-          <el-button type="danger" icon="el-icon-delete" size="mini"
+          <el-button
+            type="danger"
+            icon="el-icon-delete"
+            size="mini"
+            @click="deleteCateById(scope.row.cat_id)"
             >删除</el-button
           >
-          {{ scope.row.cat_level }}
         </template>
       </tree-table>
       <!-- 导航条 -->
@@ -97,6 +104,31 @@
         <span slot="footer" class="dialog-footer">
           <el-button @click="addCateDialogVisible = false">取 消</el-button>
           <el-button type="primary" @click="addCate">
+            确 定
+          </el-button>
+        </span>
+      </el-dialog>
+      <!-- 编辑分类弹窗 -->
+      <el-dialog
+        title="添加分类"
+        :visible.sync="editCateDialogVisible"
+        width="50%"
+      >
+        <!-- 主体内容区域 -->
+        <el-form
+          ref="editCateFormRef"
+          :model="editCateFormData"
+          label-width="80px"
+          :rules="addCateFormRules"
+        >
+          <el-form-item label="分类名称" prop="cat_name">
+            <el-input v-model="editCateFormData.cat_name" />
+          </el-form-item>
+        </el-form>
+        <!-- 下方按钮区域 -->
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="editCateDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="editCate">
             确 定
           </el-button>
         </span>
@@ -150,13 +182,19 @@ export default {
           { required: true, message: "请输入分类名称", trigger: "blur" },
         ],
       },
+      // 获取的预数据
       parentCateList: [],
+      // 级联参数配置
       cascaderProps: {
         value: "cat_id",
         label: "cat_name",
         children: "children",
       },
+      // 级联选中的 id
       selectedKeys: [],
+
+      editCateDialogVisible: false,
+      editCateFormData: {},
     };
   },
   created() {
@@ -171,7 +209,6 @@ export default {
       if (cateListData.meta.status !== 200) {
         return this.$message.error(cateListData.meta.msg);
       }
-      console.log(cateListData);
       this.cateList = cateListData.data.result;
       this.totalCateNum = cateListData.data.total;
     },
@@ -226,13 +263,67 @@ export default {
           "/categories",
           this.addCateFormData
         );
-        if (addCateResult.meta.status !== 200) {
+        if (addCateResult.meta.status !== 201) {
           return this.$message.error(addCateResult.meta.msg);
         }
         this.getCateList();
         this.addCateDialogVisible = false;
         this.$message.success(addCateResult.meta.msg);
       });
+    },
+    // 展示表单预数据和提交编辑请求以及关闭弹窗事件
+    async showEditCateDialog(id) {
+      const { data: editCateResult } = await this.$axios.get(
+        `/categories/${id}`
+      );
+      if (editCateResult.meta.status !== 200) {
+        return this.$message.error(editCateResult.meta.msg);
+      }
+      this.editCateFormData = editCateResult.data;
+      this.editCateDialogVisible = true;
+    },
+    editCate() {
+      this.$refs.editCateFormRef.validate(async (valid) => {
+        if (!valid) return;
+        const { data: editCateResult } = await this.$axios.put(
+          `/categories/${this.editCateFormData.cat_id}`,
+          {
+            cat_name: this.editCateFormData.cat_name,
+          }
+        );
+        if (editCateResult.meta.status !== 200) {
+          return this.$message.error(editCateResult.meta.msg);
+        }
+        this.getCateList();
+        this.editCateDialogVisible = false;
+        this.$message.success(editCateResult.meta.msg);
+      });
+    },
+    editCateDialogClosed() {
+      this.$refs.editCateFormRef.resetFields();
+    },
+    // 删除商品分类
+    async deleteCateById(id) {
+      const confirmResult = await this.$confirm(
+        "此操作将永久删除该分类, 是否继续?",
+        "提示",
+        {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning",
+        }
+      ).catch((err) => err);
+      if (confirmResult !== "confirm") {
+        return this.$message.info("已取消删除！");
+      }
+      const { data: deleteResult } = await this.$axios.delete(
+        `/categories/${id}`
+      );
+      if (deleteResult.meta.status !== 200) {
+        return this.$message.error(deleteResult.meta.msg);
+      }
+      this.getCateList();
+      this.$message.success(deleteResult.meta.msg);
     },
   },
 };
