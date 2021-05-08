@@ -29,6 +29,9 @@ import {
   Select,
   Option,
   Cascader,
+  Alert,
+  Tabs,
+  TabPane,
 } from "element-ui";
 
 Vue.use(Button)
@@ -57,8 +60,11 @@ Vue.use(Button)
   .use(Tree)
   .use(Select)
   .use(Option)
-  .use(Cascader);
+  .use(Cascader)
+  .use(Alert)
+  .use(Tabs)
+  .use(TabPane);
 
-// 弹窗需要挂载
+// 弹窗、确认窗口需要挂载
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm = MessageBox.confirm;

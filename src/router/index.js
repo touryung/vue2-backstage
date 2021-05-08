@@ -10,8 +10,7 @@ const routes = [
   },
   {
     path: "/login",
-    component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Login.vue"),
+    component: () => import(/* webpackChunkName: "login" */ "../views/Login.vue"),
   },
   {
     path: "/home",
@@ -26,30 +25,27 @@ const routes = [
       {
         path: "/users",
         component: () =>
-          import(
-            /* webpackChunkName: "users" */ "../components/user/Users.vue"
-          ),
+          import(/* webpackChunkName: "users" */ "../components/user/Users.vue"),
       },
       {
         path: "/rights",
         component: () =>
-          import(
-            /* webpackChunkName: "rights" */ "../components/power/Rights.vue"
-          ),
+          import(/* webpackChunkName: "rights" */ "../components/power/Rights.vue"),
       },
       {
         path: "/roles",
         component: () =>
-          import(
-            /* webpackChunkName: "roles" */ "../components/power/Roles.vue"
-          ),
+          import(/* webpackChunkName: "roles" */ "../components/power/Roles.vue"),
       },
       {
         path: "/categories",
         component: () =>
-          import(
-            /* webpackChunkName: "categories" */ "../components/goods/Cate.vue"
-          ),
+          import(/* webpackChunkName: "categories" */ "../components/goods/Cate.vue"),
+      },
+      {
+        path: "/params",
+        component: () =>
+          import(/* webpackChunkName: "params" */ "../components/goods/Params.vue"),
       },
     ],
   },

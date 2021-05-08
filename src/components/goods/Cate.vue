@@ -35,10 +35,7 @@
         <!-- 排序列 -->
         <template v-slot:order="scope">
           <el-tag v-if="scope.row.cat_level === 0" size="mini">一级</el-tag>
-          <el-tag
-            type="success"
-            v-else-if="scope.row.cat_level === 1"
-            size="mini"
+          <el-tag type="success" v-else-if="scope.row.cat_level === 1" size="mini"
             >二级</el-tag
           >
           <el-tag type="warning" v-else size="mini">三级</el-tag>
@@ -90,7 +87,6 @@
           </el-form-item>
           <el-form-item label="父级分类">
             <el-cascader
-              expand-trigger="hover"
               :options="parentCateList"
               :props="cascaderProps"
               v-model="selectedKeys"
@@ -109,11 +105,7 @@
         </span>
       </el-dialog>
       <!-- 编辑分类弹窗 -->
-      <el-dialog
-        title="添加分类"
-        :visible.sync="editCateDialogVisible"
-        width="50%"
-      >
+      <el-dialog title="添加分类" :visible.sync="editCateDialogVisible" width="50%">
         <!-- 主体内容区域 -->
         <el-form
           ref="editCateFormRef"
@@ -178,9 +170,7 @@ export default {
         cat_level: 0,
       },
       addCateFormRules: {
-        cat_name: [
-          { required: true, message: "请输入分类名称", trigger: "blur" },
-        ],
+        cat_name: [{ required: true, message: "请输入分类名称", trigger: "blur" }],
       },
       // 获取的预数据
       parentCateList: [],
@@ -189,6 +179,7 @@ export default {
         value: "cat_id",
         label: "cat_name",
         children: "children",
+        expandTrigger: "hover",
       },
       // 级联选中的 id
       selectedKeys: [],
@@ -228,20 +219,19 @@ export default {
     },
     // 获取父级分类列表
     async getParentCateList() {
-      const {
-        data: getParentCateListResult,
-      } = await this.$axios.get("/categories", { type: 2 });
+      const { data: getParentCateListResult } = await this.$axios.get("/categories", {
+        params: { type: 2 },
+      });
       if (getParentCateListResult.meta.status !== 200) {
         return this.$message.error(getParentCateListResult.meta.msg);
       }
       this.parentCateList = getParentCateListResult.data;
+      console.log(getParentCateListResult.data);
     },
     // 根据级联选择器的改变更新请求数据
     parentCateChanged() {
       if (this.selectedKeys.length > 0) {
-        this.addCateFormData.cat_pid = this.selectedKeys[
-          this.selectedKeys.length - 1
-        ];
+        this.addCateFormData.cat_pid = this.selectedKeys[this.selectedKeys.length - 1];
         this.addCateFormData.cat_level = this.selectedKeys.length;
       } else {
         this.addCateFormData.cat_pid = 0;
@@ -273,9 +263,7 @@ export default {
     },
     // 展示表单预数据和提交编辑请求以及关闭弹窗事件
     async showEditCateDialog(id) {
-      const { data: editCateResult } = await this.$axios.get(
-        `/categories/${id}`
-      );
+      const { data: editCateResult } = await this.$axios.get(`/categories/${id}`);
       if (editCateResult.meta.status !== 200) {
         return this.$message.error(editCateResult.meta.msg);
       }
@@ -316,9 +304,7 @@ export default {
       if (confirmResult !== "confirm") {
         return this.$message.info("已取消删除！");
       }
-      const { data: deleteResult } = await this.$axios.delete(
-        `/categories/${id}`
-      );
+      const { data: deleteResult } = await this.$axios.delete(`/categories/${id}`);
       if (deleteResult.meta.status !== 200) {
         return this.$message.error(deleteResult.meta.msg);
       }
