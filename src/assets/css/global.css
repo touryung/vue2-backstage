@@ -26,3 +26,7 @@ body,
 .el-pagination {
   margin-top: 15px;
 }
+
+.el-tag {
+  margin: 5px;
+}

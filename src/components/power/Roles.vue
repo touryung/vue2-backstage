@@ -24,17 +24,14 @@
             <el-row
               v-for="(item, index) in scope.row.children"
               :key="index"
-              :class="[
-                'border-bottom vcenter',
-                index === 0 ? 'border-top' : '',
-              ]"
+              :class="['border-bottom vcenter', index === 0 ? 'border-top' : '']"
             >
               <!-- 一级权限 -->
               <el-col :span="5">
                 <el-tag closable @close="removeRightById(scope.row, item.id)">{{
                   item.authName
                 }}</el-tag>
-                <i class="el-icon-caret-right"></i>
+                <i class="el-icon-caret-right" />
               </el-col>
               <el-col :span="19">
                 <el-row
@@ -50,7 +47,7 @@
                       @close="removeRightById(scope.row, item2.id)"
                       >{{ item2.authName }}</el-tag
                     >
-                    <i class="el-icon-caret-right"></i>
+                    <i class="el-icon-caret-right" />
                   </el-col>
                   <!-- 三级权限 -->
                   <el-col :span="18">
@@ -160,11 +157,7 @@
       </span>
     </el-dialog>
     <!-- 分配权限弹窗 -->
-    <el-dialog
-      title="分配权限"
-      :visible.sync="setRightDialogVisible"
-      width="50%"
-    >
+    <el-dialog title="分配权限" :visible.sync="setRightDialogVisible" width="50%">
       <el-tree
         :data="rightsList"
         :props="treeProps"
@@ -193,12 +186,8 @@ export default {
       editRoleDialogVisible: false,
       editRoleFormData: {},
       editRoleFormRules: {
-        roleName: [
-          { required: true, message: "请输入角色名称", trigger: "blur" },
-        ],
-        roleDesc: [
-          { required: true, message: "请输入角色描述", trigger: "blur" },
-        ],
+        roleName: [{ required: true, message: "请输入角色名称", trigger: "blur" }],
+        roleDesc: [{ required: true, message: "请输入角色描述", trigger: "blur" }],
       },
       addRoleDialogVisible: false,
       addRoleFormData: {},
@@ -378,10 +367,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-tag {
-  margin: 7px;
-}
-
 .border-top {
   border-top: 1px solid #eee;
 }
