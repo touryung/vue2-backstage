@@ -30,3 +30,14 @@ body,
 .el-tag {
   margin: 5px;
 }
+
+.el-steps {
+  margin: 15px 0;
+}
+.el-step__title {
+  font-size: 13px;
+}
+
+.ql-editor {
+  height: 300px !important;
+}

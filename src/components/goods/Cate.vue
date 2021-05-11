@@ -63,7 +63,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :page-sizes="[3, 5, 7, 9, 11]"
-        :page-size="5"
+        :page-size="queryInfo.pagesize"
         :total="totalCateNum"
         layout="total, sizes, prev, pager, next, jumper"
         background

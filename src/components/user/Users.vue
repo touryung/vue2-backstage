@@ -19,11 +19,7 @@
             clearable
             @clear="getUserList"
           >
-            <el-button
-              slot="append"
-              icon="el-icon-search"
-              @click="getUserList"
-            />
+            <el-button slot="append" icon="el-icon-search" @click="getUserList" />
           </el-input>
         </el-col>
         <!-- 添加用户按钮 -->
@@ -52,12 +48,7 @@
         <!-- 操作列 -->
         <el-table-column label="操作" width="180px">
           <template v-slot="scope">
-            <el-tooltip
-              effect="dark"
-              content="修改"
-              placement="top"
-              :enterable="false"
-            >
+            <el-tooltip effect="dark" content="修改" placement="top" :enterable="false">
               <el-button
                 type="primary"
                 icon="el-icon-edit"
@@ -65,12 +56,7 @@
                 @click="showEditUserDialog(scope.row.id)"
               />
             </el-tooltip>
-            <el-tooltip
-              effect="dark"
-              content="删除"
-              placement="top"
-              :enterable="false"
-            >
+            <el-tooltip effect="dark" content="删除" placement="top" :enterable="false">
               <el-button
                 type="danger"
                 icon="el-icon-delete"
@@ -78,12 +64,7 @@
                 @click="removeUserById(scope.row.id)"
               />
             </el-tooltip>
-            <el-tooltip
-              effect="dark"
-              content="权限"
-              placement="top"
-              :enterable="false"
-            >
+            <el-tooltip effect="dark" content="权限" placement="top" :enterable="false">
               <el-button
                 type="warning"
                 icon="el-icon-setting"
@@ -100,7 +81,7 @@
         @current-change="handleCurrentChange"
         :current-page="queryInfo.pagenum"
         :page-sizes="[2, 4, 6, 8, 10]"
-        :page-size="4"
+        :page-size="queryInfo.pagesize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="totalUserNum"
         background
@@ -142,12 +123,7 @@
       </span>
     </el-dialog>
     <!-- 修改用户对话框 -->
-    <el-dialog
-      title="添加用户"
-      :visible.sync="editUserDialogVisible"
-      width="50%"
-      @close="editUserFormClosed"
-    >
+    <el-dialog title="修改用户" :visible.sync="editUserDialogVisible" width="50%">
       <!-- 主体内容区域 -->
       <el-form
         ref="editUserFormRef"
@@ -356,10 +332,6 @@ export default {
 
       this.editUserDialogVisible = true;
       this.editUserFormData = userInfo.data;
-    },
-    // 编辑用户弹窗关闭
-    editUserFormClosed() {
-      this.$refs.editUserFormRef.resetFields();
     },
     // 编辑用户信息
     editUserInfo() {

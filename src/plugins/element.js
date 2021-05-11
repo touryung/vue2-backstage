@@ -32,6 +32,11 @@ import {
   Alert,
   Tabs,
   TabPane,
+  Steps,
+  Step,
+  CheckboxGroup,
+  Checkbox,
+  Upload,
 } from "element-ui";
 
 Vue.use(Button)
@@ -63,7 +68,12 @@ Vue.use(Button)
   .use(Cascader)
   .use(Alert)
   .use(Tabs)
-  .use(TabPane);
+  .use(TabPane)
+  .use(Steps)
+  .use(Step)
+  .use(CheckboxGroup)
+  .use(Checkbox)
+  .use(Upload);
 
 // 弹窗、确认窗口需要挂载
 Vue.prototype.$message = Message;
