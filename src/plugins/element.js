@@ -37,6 +37,8 @@ import {
   CheckboxGroup,
   Checkbox,
   Upload,
+  Timeline,
+  TimelineItem,
 } from "element-ui";
 
 Vue.use(Button)
@@ -73,7 +75,9 @@ Vue.use(Button)
   .use(Step)
   .use(CheckboxGroup)
   .use(Checkbox)
-  .use(Upload);
+  .use(Upload)
+  .use(Timeline)
+  .use(TimelineItem);
 
 // 弹窗、确认窗口需要挂载
 Vue.prototype.$message = Message;
