@@ -19,6 +19,8 @@ import "quill/dist/quill.bubble.css";
 
 // 导入请求库
 import axios from "axios";
+// 导入工具库
+import _ from "lodash";
 
 // 设置 axios 的基础路径
 axios.defaults.baseURL = "http://www.ysqorz.top:8888/api/private/v1/";
@@ -31,6 +33,7 @@ axios.interceptors.request.use((config) => {
 
 // 挂载到 Vue 原型
 Vue.prototype.$axios = axios;
+Vue.prototype.$_ = _;
 
 // 关闭生产模式下给出的提示
 Vue.config.productionTip = false;

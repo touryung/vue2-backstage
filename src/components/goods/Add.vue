@@ -251,7 +251,7 @@ export default {
           return this.$message.error("请填写必要的表单项！");
         }
         // 深拷贝防止级联选择器报错
-        const formData = JSON.parse(JSON.stringify(this.addFormData));
+        const formData = this.$_.cloneDeep(this.addFormData);
         formData.goods_cat = formData.goods_cat.join(",");
         // 处理动态参数
         this.manyTableData.forEach((item) => {
