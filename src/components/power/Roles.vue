@@ -22,8 +22,8 @@
         <el-table-column type="expand">
           <template v-slot="scope">
             <el-row
-              v-for="(item, index) in scope.row.children"
-              :key="index"
+              v-for="item in scope.row.children"
+              :key="item.id"
               :class="['border-bottom vcenter', index === 0 ? 'border-top' : '']"
             >
               <!-- 一级权限 -->
@@ -35,8 +35,8 @@
               </el-col>
               <el-col :span="19">
                 <el-row
-                  v-for="(item2, index2) in item.children"
-                  :key="index2"
+                  v-for="item2 in item.children"
+                  :key="item2.id"
                   :class="['vcenter', index2 === 0 ? '' : 'border-top']"
                 >
                   <!-- 二级权限 -->
@@ -52,8 +52,8 @@
                   <!-- 三级权限 -->
                   <el-col :span="18">
                     <el-tag
-                      v-for="(item3, index3) in item2.children"
-                      :key="index3"
+                      v-for="item3 in item2.children"
+                      :key="item3.id"
                       type="warning"
                       closable
                       @close="removeRightById(scope.row, item3.id)"

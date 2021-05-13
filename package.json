@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "buildAndReport": "vue-cli-service build --report"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -12,6 +13,7 @@
     "echarts": "^5.1.1",
     "element-ui": "^2.4.5",
     "lodash": "^4.17.21",
+    "nprogress": "^0.2.0",
     "vue": "^2.6.11",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.2.0",
@@ -22,6 +24,7 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-plugin-component": "^1.1.1",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "dart-sass": "^1.25.0",
     "sass": "^1.32.8",
     "sass-loader": "^9.0.3",

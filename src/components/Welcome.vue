@@ -1,26 +1,23 @@
 <template>
-  <pre>
+  <el-card>
     {{ data }}
-  </pre>
+  </el-card>
 </template>
 
 <script>
 export default {
   data() {
     return {
-      data: "",
+      data: "Welcome",
     };
   },
-  created() {
-    this.fetchData();
-  },
-  methods: {
-    async fetchData() {
-      let data = await this.$axios.get("menus");
-      this.data = JSON.stringify(data, null, 2);
-    },
-  },
+  created() {},
+  methods: {},
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.el-card {
+  text-align: center;
+}
+</style>

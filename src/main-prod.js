@@ -1,7 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import "./plugins/element.js";
 
 // 导入全局样式表和图标库
 import "./assets/css/global.css";
@@ -9,9 +8,6 @@ import "./assets/fonts/iconfont.css";
 
 // 导入富文本编辑器组件和样式并全局注册
 import VueQuillEditor from "vue-quill-editor";
-import "quill/dist/quill.core.css";
-import "quill/dist/quill.snow.css";
-import "quill/dist/quill.bubble.css";
 Vue.use(VueQuillEditor);
 
 // 导入树形表格组件并全局注册组件
@@ -24,7 +20,6 @@ Vue.prototype.$_ = _;
 
 // 导入进度条
 import NProgress from "nprogress";
-import "nprogress/nprogress.css";
 
 // 导入请求库并挂载到 Vue 原型
 import axios from "axios";
