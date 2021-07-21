@@ -1,4 +1,6 @@
 module.exports = {
+  publicPath: "./",
+  outputDir: "docs",
   // 链式配置
   chainWebpack: (config) => {
     // 发布模式
