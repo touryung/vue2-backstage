@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["welcome"],{"1ddd":function(t,e,n){"use strict";n.r(e);var c=function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("el-card",[t._v(" "+t._s(t.data)+" ")])},a=[],o={data:function(){return{data:"Welcome"}},created:function(){},methods:{}},u=o,r=(n("8f77"),n("2877")),d=Object(r["a"])(u,c,a,!1,null,"628029c1",null);e["default"]=d.exports},"8f77":function(t,e,n){"use strict";n("b9b7")},b9b7:function(t,e,n){}}]);
+//# sourceMappingURL=welcome.f6b0edb1.js.map
